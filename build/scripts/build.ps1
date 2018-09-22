@@ -277,7 +277,7 @@ function Build-OptProfData() {
     $optProfToolDir = Get-PackageDir "RoslynTools.OptProf"
     $optProfToolExe = Join-Path $optProfToolDir "tools\roslyn.optprof.exe"
     $configFile = Join-Path $repoDir "build\config\optprof.json"
-    $insertionFolder = Join-Path $configDir "Insertion"
+    $insertionFolder = Join-Path $vsSetupDir "Insertion"
     $outputFolder = Join-Path $configDir "DevDivInsertionFiles\OptProf"
     $optProfArgs = "--configFile $configFile --insertionFolder $insertionFolder --outputFolder $outputFolder"
     Exec-Console $optProfToolExe $optProfArgs
