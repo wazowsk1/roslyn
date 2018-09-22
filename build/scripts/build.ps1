@@ -256,6 +256,7 @@ function Build-Artifacts() {
     if ($build -and $pack -and (-not $buildCoreClr)) {
         Build-InsertionItems
         Build-Installer
+        Build-OptProfData
     }
 }
 
@@ -270,6 +271,16 @@ function Build-InsertionItems() {
     finally {
         Pop-Location
     }
+}
+
+function Build-OptProfData() {
+    $optProfToolDir = Get-PackageDir "RoslynTools.OptProf"
+    $optProfToolExe = Join-Path $optProfToolDir "tools\roslyn.optprof.exe"
+    $configFile = Join-Path $repoDir "build\config\optprof.json"
+    $insertionFolder = Join-Path $configDir "Insertion"
+    $outputFolder = Join-Path $configDir "DevDivInsertionFiles\OptProf"
+    $optProfArgs = "--configFile $configFile --insertionFolder $insertionFolder --outputFolder $outputFolder"
+    Exec-Console $optProfToolExe $optProfArgs
 }
 
 function Build-Installer () {
