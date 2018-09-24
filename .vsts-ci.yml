@@ -81,14 +81,6 @@ steps:
   displayName: 'Publish to Artifact Services - ProfilingInputs'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
-- task: VSBuild@1
-  displayName: 'Build Editor RunSettings project'
-  inputs:
-    solution: 'src/**/*.RunSettings.sln'
-    vsVersion: 15.0
-    platform: '$(BuildPlatform)'
-    configuration: '$(BuildConfiguration)'
-
 - task: PowerShell@2
   inputs:
     filePath: build\scripts\setmanifestpaths.ps1
