@@ -74,7 +74,7 @@ steps:
   inputs:
     dropServiceURI: 'https://devdiv.artifacts.visualstudio.com'
     buildNumber: 'ProfilingInputs/$(System.TeamProject)/$(Build.Repository.Name)/$(Build.SourceBranchName)/$(Build.SourceVersion)'
-    sourcePath: '$(Build.ArtifactStagingDirectory)\OptProf\ProfilingInputs'
+    sourcePath: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\DevDivInsertionFiles\OptProf'
     toLowerCase: false
     usePat: false
   displayName: 'Publish to Artifact Services - ProfilingInputs'

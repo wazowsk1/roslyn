@@ -279,6 +279,7 @@ function Build-OptProfData() {
     $configFile = Join-Path $repoDir "build\config\optprof.json"
     $insertionFolder = Join-Path $vsSetupDir "Insertion"
     $outputFolder = Join-Path $configDir "DevDivInsertionFiles\OptProf"
+    Write-Host "Generating optprof data using '$configFile' into '$outputFolder'"
     $optProfArgs = "--configFile $configFile --insertionFolder $insertionFolder --outputFolder $outputFolder"
     Exec-Console $optProfToolExe $optProfArgs
 }
