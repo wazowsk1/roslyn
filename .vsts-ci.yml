@@ -71,6 +71,7 @@ steps:
     maximumCpuCount: true
     logProjectEvents: false
 
+# Publish optprof configuration files
 - task: ms-vscs-artifact.build-tasks.artifactDropTask-1.artifactDropTask@0
   inputs:
     dropServiceURI: 'https://devdiv.artifacts.visualstudio.com'
@@ -81,6 +82,7 @@ steps:
   displayName: 'Publish to Artifact Services - ProfilingInputs'
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
+# Created a exe that will install visual studio with this version 
 - task: PowerShell@2
   inputs:
     filePath: build\scripts\setmanifestpaths.ps1
@@ -94,18 +96,26 @@ steps:
     manifests: $(SetupManifests)
     outputFolder: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\Installer\Bootstrap'
   displayName: Build VS bootstrapper
-  condition: succeeded()
+  condition: succeeded()rel
+
+# Publish run settings
+- task: PowerShell@2
+  inputs:
+    filePath: build\scripts\createrunsettings.ps1 -release
+    failOnStderr: true
+  displayName: generate runsettings file
 
 - task: ms-vscs-artifact.build-tasks.artifactDropTask-1.artifactDropTask@0
   inputs:
     dropServiceURI: 'https://devdiv.artifacts.visualstudio.com'
-    buildNumber: 'RunSettings/$(System.TeamProject)/$(Build.Repository.Name)/$(Build.SourceBranchName)/$(Build.SourceVersion)'
-    sourcePath: 'bin\RunSettings'
+    buildNumber: 'RunSettings/$(System.TeamProject)/$(Build.Repository.Name)/$(Build.SourceBranchName)/$(Build.BuildId)'
+    sourcePath: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\DevDivInsertionFiles\RunSettings'
     toLowerCase: false
     usePat: false
     dropMetadataContainerName: RunSettings
   displayName: 'Publish to Artifact Services - RunSettings'
   condition: succeeded()
+
 
 - task: PublishBuildArtifacts@1
   displayName: Publish Logs
