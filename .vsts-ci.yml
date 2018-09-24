@@ -96,7 +96,7 @@ steps:
     manifests: $(SetupManifests)
     outputFolder: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\Installer\Bootstrap'
   displayName: Build VS bootstrapper
-  condition: succeeded()rel
+  condition: succeeded()
 
 # Publish run settings
 - task: PowerShell@2
