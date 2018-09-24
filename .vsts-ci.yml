@@ -11,7 +11,8 @@ queue:
 
 variables:
   BuildPlatform: 'Any CPU'
-  InsertTargetBranch: '16.0'
+  InsertTargetBranchFullName: 'lab/ml'
+  InsertTargetBranchShortName: 'ml'
 steps:
 - task: NuGetCommand@2
   inputs:
@@ -88,6 +89,21 @@ steps:
     platform: '$(BuildPlatform)'
     configuration: '$(BuildConfiguration)'
 
+- task: PowerShell@2
+  inputs:
+    filePath: build\scripts\setmanifestpaths.ps1
+    failOnStderr: true
+  displayName: Set VSTS variables for vsman files
+
+- task: ms-vseng.MicroBuildTasks.0e9d0d4d-71ec-4e4e-ae40-db9896f1ae74.MicroBuildBuildVSBootstrapper@1
+  inputs:
+    vsMajorVersion: 16
+    channelName: $(InsertTargetBranchShortName)
+    manifests: $(SetupManifests)
+    outputFolder: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\Installer\Bootstrap'
+  displayName: Build VS bootstrapper
+  condition: succeeded()
+
 - task: ms-vscs-artifact.build-tasks.artifactDropTask-1.artifactDropTask@0
   inputs:
     dropServiceURI: 'https://devdiv.artifacts.visualstudio.com'
@@ -97,7 +113,7 @@ steps:
     usePat: false
     dropMetadataContainerName: RunSettings
   displayName: 'Publish to Artifact Services - RunSettings'
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  condition: succeeded()
 
 - task: PublishBuildArtifacts@1
   displayName: Publish Logs
