@@ -4,12 +4,6 @@
       "name": "Roslyn.VisualStudio.Setup.vsix",
       "tests": [
         {
-          "container": "DDRIT.RPS.ManagedLangs",
-          "testCases": [
-            "Microsoft.Test.Performance.DDPerf.ManagedLangsTest.ManagedLangs"
-          ]
-        },
-        {
           "container": "DDRIT.RPS.CSharp",
           "testCases": [
             "DDRIT.RPS.CSharp.CSharpTest.EditingAndDesigner"
@@ -110,12 +104,6 @@
     {
       "name": "Roslyn.VisualStudio.InteractiveComponents.vsix",
       "tests": [
-        {
-          "container": "DDRIT.RPS.ManagedLangs",
-          "testCases": [
-            "Microsoft.Test.Performance.DDPerf.ManagedLangsTest.ManagedLangs"
-          ]
-        },
         {
           "container": "DDRIT.RPS.CSharp",
           "testCases": [
