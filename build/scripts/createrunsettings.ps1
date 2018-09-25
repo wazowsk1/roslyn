@@ -32,8 +32,4 @@ catch {
 }
 finally {
     Pop-Location
-    if ($cibuild -and -not $official) {
-        Stop-VSProcesses
-        Stop-BuildProcesses
-    }
 }
