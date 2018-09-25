@@ -133,7 +133,7 @@ steps:
   inputs:
     PathtoPublish: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\DevDivInsertionFiles\Scripts'
     ArtifactName: Scripts
-    ArtifactType: Containers
+    ArtifactType: Container
   displayName: 'OPTPROF - Publish Artifact: Scripts'
   condition: succeededOrFailed()
 
