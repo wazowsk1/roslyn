@@ -8,3 +8,6 @@ if (Test-Path $vsmanpath) {
     Write-Host "Using the following manifests '$SetupManifests'"
     Set-Item -Path "env:SetupManifests" -Value $SetupManifests
 }
+else {
+    Write-Host "Unable to find manifest files"
+}
