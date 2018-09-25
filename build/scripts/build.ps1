@@ -282,6 +282,8 @@ function Build-OptProfData() {
     Write-Host "Generating optprof data using '$configFile' into '$outputFolder'"
     $optProfArgs = "--configFile $configFile --insertionFolder $insertionFolder --outputFolder $outputFolder"
     Exec-Console $optProfToolExe $optProfArgs
+    
+    # Write Out Scripts
 }
 
 function Build-Installer () {
