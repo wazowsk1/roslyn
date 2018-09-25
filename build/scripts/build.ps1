@@ -284,6 +284,14 @@ function Build-OptProfData() {
     Exec-Console $optProfToolExe $optProfArgs
     
     # Write Out Scripts
+    $vsBranchFolder = Join-Path $configDir "DevDivInsertionFiles\Scripts"
+    New-Item -ItemType Directory -Force -Path $vsBranchFolder
+    $vsBranchScript = Join-Path $vsBranchFolder "getvsbranch.ps1"
+    $vsBranch = $Env:InsertTargetBranchFullName
+    $vsBranchScriptContents = @"
+Set-Item -Path "env:VSBranch" -Value $vsBranch
+"@
+    $vsBranchScriptContents >> $vsBranchScript
 }
 
 function Build-Installer () {

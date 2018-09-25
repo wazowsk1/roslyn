@@ -125,6 +125,15 @@ steps:
   displayName: 'Publish Artifact: MicroBuildOutputs'
   condition: succeededOrFailed()
 
+# Publish scripts to get the branch of VS that this inserts into
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\DevDivInsertionFiles\Scripts'
+    ArtifactName: Scripts
+    ArtifactType: Containers
+  displayName: 'Publish Artifact: Scripts'
+  condition: succeededOrFailed()
+
 - task: PublishBuildArtifacts@1
   displayName: Publish Logs
   inputs:
