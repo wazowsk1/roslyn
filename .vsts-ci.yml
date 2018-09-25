@@ -101,7 +101,8 @@ steps:
 # Publish run settings
 - task: PowerShell@2
   inputs:
-    filePath: build\scripts\createrunsettings.ps1 -release
+    filePath: build\scripts\createrunsettings.ps1
+    arguments: -release
     failOnStderr: true
   displayName: generate runsettings file
 
