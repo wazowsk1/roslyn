@@ -6,6 +6,8 @@ $vsmanpath = "Binaries/VSSetup/$Env:BuildConfiguration/Insertion"
 if (Test-Path $vsmanpath) {
     $SetupManifests = [string]::Join(',', (Get-ChildItem "Binaries/VSSetup/$Env:BuildConfiguration/Insertion/*.vsman"))
     Write-Host "Using the following manifests '$SetupManifests'"
+    Write-Host "SetupManifests=$SetupManifests"
+    Write-Host "##vso[task.setvariable variable=SetupManifests;]$SetupManifests"
     Set-Item -Path "env:SetupManifests" -Value $SetupManifests
 }
 else {

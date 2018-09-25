@@ -289,6 +289,7 @@ function Build-OptProfData() {
     $vsBranchScript = Join-Path $vsBranchFolder "getvsbranch.ps1"
     $vsBranch = $Env:InsertTargetBranchFullName
     $vsBranchScriptContents = @"
+    Write-Host "##vso[task.setvariable variable=VSBranch;]$vsBranch"
 Set-Item -Path "env:VSBranch" -Value $vsBranch
 "@
     $vsBranchScriptContents >> $vsBranchScript
