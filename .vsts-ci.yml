@@ -75,7 +75,7 @@ steps:
 - task: ms-vscs-artifact.build-tasks.artifactDropTask-1.artifactDropTask@0
   inputs:
     dropServiceURI: 'https://devdiv.artifacts.visualstudio.com'
-    buildNumber: 'ProfilingInputs/$(System.TeamProject)/$(Build.Repository.Name)/$(Build.SourceBranchName)/$(Build.SourceVersion)'
+    buildNumber: 'ProfilingInputs/$(Build.Repository.Name)/$(Build.SourceBranchName)/$(Build.SourceVersion)'
     sourcePath: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\DevDivInsertionFiles\OptProf'
     toLowerCase: false
     usePat: false
@@ -94,7 +94,7 @@ steps:
     vsMajorVersion: 16
     channelName: $(InsertTargetBranchShortName)
     manifests: $(SetupManifests)
-    outputFolder: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\Installer\Bootstrap'
+    outputFolder: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\Installer'
   displayName: Build VS bootstrapper
   condition: succeeded()
 
@@ -108,7 +108,7 @@ steps:
 - task: ms-vscs-artifact.build-tasks.artifactDropTask-1.artifactDropTask@0
   inputs:
     dropServiceURI: 'https://devdiv.artifacts.visualstudio.com'
-    buildNumber: 'RunSettings/$(System.TeamProject)/$(Build.Repository.Name)/$(Build.SourceBranchName)/$(Build.BuildId)'
+    buildNumber: 'RunSettings/$(Build.Repository.Name)/$(Build.SourceBranchName)/$(Build.BuildId)'
     sourcePath: '$(Build.SourcesDirectory)\Binaries\$(BuildConfiguration)\DevDivInsertionFiles\RunSettings'
     toLowerCase: false
     usePat: false
